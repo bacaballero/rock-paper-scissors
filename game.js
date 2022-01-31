@@ -38,10 +38,9 @@ function game() {
         }
     }
 
-    
-
-    playRound();
-
+    while (computerScore < 5 && playerScore < 5) {
+        playRound();
+    }
 }
 
 game();
