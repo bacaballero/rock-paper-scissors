@@ -7,7 +7,9 @@ function game() {
     const scoreInfo = document.querySelector(".score-info");
     const scoreMessage = document.createElement('p');
     scoreInfo.appendChild(scoreMessage);
+    
 
+    
     const buttons = document.querySelectorAll('button');
     buttons.forEach((button) => {
         button.addEventListener('click', () => {
@@ -32,7 +34,7 @@ function game() {
 
         if (computerSelection == playerSelection) {
             // results.textContent = "It's a tie!";
-            console.log("It's a tie!");
+            updateScore();
             scoreMessage.textContent = "It's a tie!";
         } else if (
             (computerSelection == "rock" && playerSelection == "scissors") || 
@@ -40,17 +42,18 @@ function game() {
             (computerSelection == "scissors" && playerSelection == "paper")
         ) {
             computerScore++; 
-            scoreMessage.textContent = `Computer's ${computerSelection} beats your ${playerSelection}. You lost that round.
-            Score is now You: ${playerScore} vs. Computer: ${computerScore}`; 
-            console.log(`Computer's ${computerSelection} beats your ${playerSelection}. You lost that round.
-            Score is now You: ${playerScore} vs. Computer: ${computerScore}`);
+            scoreMessage.textContent = `Computer's ${computerSelection} beats your ${playerSelection}. You lost that round.`; 
+            updateScore();
         } else {
             playerScore++;
-            scoreMessage.textContent = `Your ${playerSelection} beats their ${computerSelection}. You win that round.
-            Score is now You: ${playerScore} vs. Computer: ${computerScore}`;
-            console.log(`Your ${playerSelection} beats their ${computerSelection}. You win that round.
-            Score is now You: ${playerScore} vs. Computer: ${computerScore}`);
+            scoreMessage.textContent = `Your ${playerSelection} beats their ${computerSelection}. You win that round.`;
+            updateScore();
         }
+    }
+
+    function updateScore() {
+        const scoreTracker = document.querySelector(".score-tracker");
+        scoreTracker.textContent = `Score is now You: ${playerScore} vs. Computer: ${computerScore}`;
     }
 };
 
