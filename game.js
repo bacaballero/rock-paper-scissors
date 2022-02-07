@@ -19,9 +19,9 @@ function game() {
 
     function playRound(playerSelection, computerSelection) {
         computerSelection = computerPlay().toLowerCase();
-        playerSelection = prompt("Choose rock, paper, or scissors").toLowerCase();
 
         if (computerSelection == playerSelection) {
+            // results.textContent = "It's a tie!";
             console.log("It's a tie!");
         } else if (
             (computerSelection == "rock" && playerSelection == "scissors") || 
@@ -29,18 +29,28 @@ function game() {
             (computerSelection == "scissors" && playerSelection == "paper")
         ) {
             computerScore++; 
+            /*results.textContent = `Computer's ${computerSelection} beats your ${playerSelection}. You lost that round.
+            Score is now You: ${playerScore} vs. Computer: ${computerScore}`; */
             console.log(`Computer's ${computerSelection} beats your ${playerSelection}. You lost that round.
             Score is now You: ${playerScore} vs. Computer: ${computerScore}`);
         } else {
             playerScore++;
+            /*results.textContent = `Your ${playerSelection} beats their ${computerSelection}. You win that round.
+            Score is now You: ${playerScore} vs. Computer: ${computerScore}`;*/
             console.log(`Your ${playerSelection} beats their ${computerSelection}. You win that round.
             Score is now You: ${playerScore} vs. Computer: ${computerScore}`);
         }
     }
 
-    while (computerScore < 5 && playerScore < 5) {
-        playRound();
-    }
-}
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            playRound(playerSelection = `${button.id}`, computerSelection);
+        });
+    });
+
+
+
+};
 
 game();
