@@ -8,14 +8,19 @@ function game() {
     const scoreMessage = document.createElement('p');
     scoreInfo.appendChild(scoreMessage);
     
-
-    
     const buttons = document.querySelectorAll('button');
     buttons.forEach((button) => {
         button.addEventListener('click', () => {
             playRound(playerSelection = `${button.id}`, computerSelection);
+            checkForWinner();
         });
     });
+
+    function checkForWinner() {
+        if (playerScore > 4 || computerScore > 4) {
+            declareWinner();
+        }
+    }
 
     function computerPlay() {
         guess = Math.floor(Math.random() * 3);
@@ -26,6 +31,14 @@ function game() {
             return "Paper";
         } else {
             return "Scissors";
+        }
+    }
+
+    function declareWinner () {
+        if (playerScore > computerScore) {
+            scoreMessage.textContent = "You win!";
+        } else {
+            scoreMessage.textContent = "You lose!";
         }
     }
     
